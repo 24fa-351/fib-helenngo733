@@ -12,13 +12,17 @@ int fib_recursive(int fib_nth) {
    return fib_recursive(fib_nth - 1) + fib_recursive(fib_nth - 2);
 }
 
-int main (int argc, char *argv[]) {
-
-   if (argc != 4) {
-      printf("Parameters: ./fib <input_num> <r> <file_name>\n");
-      return 1;
+int fib_iterative(int fib_nth) {
+   int prev_num = 0, current_num = 1, temp_next_num;
+   for (int i = 2; i <= fib_nth; i++) {
+      temp_next_num = prev_num + current_num;
+      prev_num = current_num;
+      current_num = temp_next_num;
    }
-   
+   return current_num;
+}
+
+int main (int argc, char *argv[]) {
    int input_num = atoi(argv[1]); //atoi - converts string to integer
    FILE *file = fopen(argv[3], "r"); //open file for reading
    
@@ -27,7 +31,13 @@ int main (int argc, char *argv[]) {
    fclose(file);
 
    int fib_nth = input_num + file_number - 1;
-   int result = fib_recursive(fib_nth);
+   int result;
+   
+   if (argv[2][0] == 'r') {
+      result = fib_recursive(fib_nth);
+   } else if (argv[2][0] == 'i') {
+      result = fib_iterative(fib_nth);
+   }
 
    printf("%d\n", result);
 }
