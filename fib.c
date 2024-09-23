@@ -14,7 +14,7 @@ int fib_recursive(int fib_nth) {
 
 int fib_iterative(int fib_nth) {
    int prev_num = 0, current_num = 1, temp_next_num;
-   for (int i = 2; i <= fib_nth; i++) {
+   for (int ix = 2; ix <= fib_nth; ix++) {
       temp_next_num = prev_num + current_num;
       prev_num = current_num;
       current_num = temp_next_num;
